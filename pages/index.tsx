@@ -7,13 +7,15 @@ import {
 } from "@thirdweb-dev/react";
 import { ListingType } from "@thirdweb-dev/sdk";
 import { BanknotesIcon, ClockIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const { contract } = useContract(
     process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT,
     "marketplace"
   );
-
+  const router = useRouter();
   const { data: listings, isLoading: loadingListings } =
     useActiveListings(contract);
 
@@ -33,6 +35,7 @@ const Home: NextPage = () => {
           >
             {listings?.map((listing) => (
               <div
+                onClick={() => router.push(`/listing/${listing.id}`)}
                 className="flex flex-col card hover:scale-105 transition-all duration-150 ease-out"
                 key={listing.id}
               >
