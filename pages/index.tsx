@@ -10,6 +10,7 @@ import { BanknotesIcon, ClockIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+
 const Home: NextPage = () => {
   const { contract } = useContract(
     process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT,
@@ -25,7 +26,7 @@ const Home: NextPage = () => {
       <main className="max-w-6xl mx-auto p-5">
         {loadingListings ? (
           <p className="text-center animate-pulse text-blue-500">
-            Loading listings...
+            Loading listings....
           </p>
         ) : (
           <div
