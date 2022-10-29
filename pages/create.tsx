@@ -18,7 +18,7 @@ import {
   NATIVE_TOKEN_ADDRESS,
 } from "@thirdweb-dev/sdk";
 import network from "../utils/network";
-
+import toast, { Toaster } from "react-hot-toast";
 type Props = {};
 
 function Create({}: Props) {
@@ -53,6 +53,7 @@ function Create({}: Props) {
 
   const handleCreateListing = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    toast.loading("Creating a listing");
     if (networkMismatch) {
       switchNetwork && switchNetwork(network);
       return;
@@ -79,10 +80,14 @@ function Create({}: Props) {
         },
         {
           onSuccess(data, variables, context) {
-            console.log(data, variables, context);
+            toast.dismiss();
+            toast.success("Listing created successfully", {
+              duration: 8000,
+            });
             router.push("/");
           },
           onError(error, variables, context) {
+            toast.error("ERROR:Cannot create Listing");
             console.log(error);
           },
         }
@@ -116,6 +121,7 @@ function Create({}: Props) {
 
   return (
     <div>
+      <Toaster />
       <Header />
       <main className="max-w-6xl mx-auto p-10 pt-2">
         <h1 className="text-4xl font-bold ">List an Item</h1>

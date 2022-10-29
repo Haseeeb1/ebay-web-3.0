@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import Header from "../components/Header";
 import { useAddress, useContract } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
-
+import toast, { Toaster } from "react-hot-toast";
 type Props = {};
 
 function addItems({}: Props) {
@@ -17,10 +17,13 @@ function addItems({}: Props) {
 
   const mintNft = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    toast.dismiss();
+    toast.loading("Minting The NFT...");
     if (!contract || !address) return;
 
     if (!image) {
-      alert("Please select an image!");
+      toast.dismiss();
+      toast("Please select an image!");
       return;
     }
 
@@ -41,14 +44,18 @@ function addItems({}: Props) {
       const tokenId = tx.id;
       const nft = await tx.data();
       */
+      toast.success("Minted Successfully...", {
+        duration: 6000,
+      });
       router.push("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Cannot Mint NFT");
     }
   };
 
   return (
     <div>
+      <Toaster />
       <Header />
       <main className="max-w-6xl mx-auto p-10 border">
         <h1 className="text-4xl font-bold">Add an Item to the Marketplace</h1>

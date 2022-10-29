@@ -100,7 +100,9 @@ function ListingPage() {
       {
         onSuccess(data, variables, context) {
           toast.dismiss();
-          toast.success("Nft bought successfully!");
+          toast.success("Listing created successfully", {
+            duration: 10000,
+          });
           router.replace("/");
         },
         onError(error, variables, context) {
