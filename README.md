@@ -1,3 +1,8 @@
+## DEPLOYED (with vercel):
+
+             https://ebay-web3.vercel.app/
+
+
 ## METAMASK
 
 https://metamask.io/download/
